@@ -25,7 +25,7 @@ export default function ChatPage({ params: { id } }: ChatIdprops) {
       });
     };
     fetch_data();
-  }, []);
+  }, [chatId]);
 
   return (
     <div className="main-container p:0 sm:px-10 sm:py-3 ">

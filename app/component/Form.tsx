@@ -1,102 +1,94 @@
-'use client'
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from "react";
 import {
   EmailOutlined,
   LockOutlined,
   PersonOutline,
 } from "@mui/icons-material";
-import Link from 'next/link';
-import { useForm, SubmitHandler } from "react-hook-form"
-import { AuthCreate, AuthLogin, getUserData_ById } from '../lib/auth.actions';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useAppSelector, useAppDispatch } from '@/app/hooks'
-import { UserState, getData } from '@/app/lib/Redux/userdata'
+import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { AuthCreate, AuthLogin, getUserData_ById } from "../lib/auth.actions";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAppSelector, useAppDispatch } from "@/app/hooks";
+import { UserState, getData } from "@/app/lib/Redux/userdata";
+import Image from "next/image";
 
 type Inputs = {
-  userName: string
-  email: string
-  password:string
-}
+  userName: string;
+  email: string;
+  password: string;
+};
 
+export default function Form({ type }: { type: "register" | "login" }) {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [isSuccess, setSuccess] = useState(false);
+  const dispatch = useAppDispatch();
 
-export default function Form({type}:{type:"register"| "login"}) {
-  const router =  useRouter()
-  const [error, setError] = useState('')
-  const [isSuccess,setSuccess] = useState(false)
-  const dispatch = useAppDispatch() 
-  
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>()
+  } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> =async (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      if(type ==='register'){
-        const newUser =  await AuthCreate({user:{...data}})
-    
-        
-        if(newUser.status === 401){
-        alert("This Email Already Exists")
+      if (type === "register") {
+        const newUser = await AuthCreate({ user: { ...data } });
+
+        if (newUser.status === 401) {
+          alert("This Email Already Exists");
         }
-                
-        if(newUser.status === 200){
-          setSuccess(true)
-          router.push("/")
-    
+
+        if (newUser.status === 200) {
+          setSuccess(true);
+          router.push("/");
         }
       }
-      if(type === 'login'){
-   
-          const newUser = await AuthLogin({user:{...data},isVerifyed: true})
-      
-          setError(newUser.message)
+      if (type === "login") {
+        const newUser = await AuthLogin({
+          user: { ...data },
+          isVerifyed: true,
+        });
 
-      
-       
-        if(newUser.status == 404){
-         
-          alert(error)
+        setError(newUser.message);
+
+        if (newUser.status == 404) {
+          alert(error);
         }
-        if(newUser.status == 200){
-  
-          const email =newUser?.CreateLogin.email
-       
-        localStorage.setItem('email', email);
-        ;
-    
+        if (newUser.status == 200) {
+          const email = newUser?.CreateLogin.email;
 
-          const data = await  getUserData_ById({userId:email})
-          localStorage.setItem('data', JSON.stringify(data))
-         const local_Value= localStorage.getItem('data')
-         if(local_Value){
-
-          const userData = JSON.parse(local_Value)
-          if(userData){
-            dispatch(getData(userData))
-            setSuccess(true)
-            router.push(`/chats`)
+          localStorage.setItem("email", email);
+          const data = await getUserData_ById({ userId: email });
+          localStorage.setItem("data", JSON.stringify(data));
+          const local_Value = localStorage.getItem("data");
+          if (local_Value) {
+            const userData = JSON.parse(local_Value);
+            if (userData) {
+              dispatch(getData(userData));
+              setSuccess(true);
+              router.push(`/chats`);
+            }
           }
-         }
-        
-          
         }
-        
       }
-      
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
-  }
+  };
 
-  
   return (
     <div className="auth">
       <div className="content">
-        <img src="/assets/logo.png" alt="logo" className="logo" />
+        <Image
+          width={100}
+          height={100}
+          src="/assets/logo.png"
+          alt="logo"
+          className="logo"
+        />
 
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
           {type === "register" && (
@@ -161,21 +153,22 @@ export default function Form({type}:{type:"register"| "login"}) {
               />
               <LockOutlined sx={{ color: "#737373" }} />
             </div>
-            {errors.password  && (
-              <p className="text-red-500">{ errors.password.message}</p>
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
             )}
             {/* {error    && (
               <p className="text-red-500">{error}</p>
             )} */}
-
           </div>
 
           <button className="button" type="submit">
-            {
-              isSuccess ? 
-              type === "register" ? "Account Created" : "Login Successfully" : type === "register" ? "Join Free" : "Let's Chat"  
-            }
-         
+            {isSuccess
+              ? type === "register"
+                ? "Account Created"
+                : "Login Successfully"
+              : type === "register"
+              ? "Join Free"
+              : "Let's Chat"}
           </button>
         </form>
 
@@ -190,5 +183,5 @@ export default function Form({type}:{type:"register"| "login"}) {
         )}
       </div>
     </div>
-  )
+  );
 }

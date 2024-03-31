@@ -8,6 +8,7 @@ import { UserUpdate, getUserData_ById } from "../lib/auth.actions";
 import { UserDataProps } from "../type";
 import { useRouter } from "next/navigation";
 import { CldUploadButton } from "next-cloudinary";
+import Image from "next/image";
 type Inputs = {
   userName: string;
 };
@@ -89,10 +90,12 @@ export default function ProfilePage() {
         )}
 
         <div className="flex items-center justify-between">
-          <img
+          <Image
             src={file || userImage || "/assets/person.jpg"}
             alt="profile"
             className="w-40 h-40 rounded-full"
+            width={100}
+            height={100}
           />
           <CldUploadButton
             uploadPreset="qeccdbls"

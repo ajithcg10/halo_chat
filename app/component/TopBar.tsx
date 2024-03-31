@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { getUserData_ById } from "../lib/auth.actions";
 import { UserDataProps } from "../type";
+import Image from "next/image";
 
 const TopBar = () => {
   const pathname = usePathname();
@@ -28,7 +29,13 @@ const TopBar = () => {
   return (
     <div className="topbar wrapper">
       <Link href="/chats">
-        <img src="/assets/logo.png" alt="logo" className="logo" />
+        <Image
+          width={100}
+          height={100}
+          src="/assets/logo.png"
+          alt="logo"
+          className="logo"
+        />
       </Link>
 
       <div className="menu">
@@ -55,12 +62,14 @@ const TopBar = () => {
         />
 
         <Link href="/profile">
-          <img
+          <Image
             src={
               datafile?.data.loginDetails.profileImage || "/assets/person.jpg"
             }
             alt="profile"
             className="profilePhoto"
+            width={100}
+            height={100}
           />
         </Link>
       </div>

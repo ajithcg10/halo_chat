@@ -45,7 +45,7 @@ export default function ChatDeatils({ chatId }: DeatilsProps) {
       );
     };
     fetch_data();
-  }, []);
+  }, [chatId]);
 
   const onupload = async (result: any) => {
     const newmessage = await Create_Message({
