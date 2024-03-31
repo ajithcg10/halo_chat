@@ -24,7 +24,7 @@ const UserSechema = new Schema({
         type:[{type:Schema.Types.ObjectId,ref:"chat"}],
         default:[]
     },
-    clerkId:{type:String},
+    clerkId:{type:String, default:""},
 }
 )
 const User = models.User || model('User',UserSechema);

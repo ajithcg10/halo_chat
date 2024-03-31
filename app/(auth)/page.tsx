@@ -1,9 +1,11 @@
-import { SignUp } from "@clerk/nextjs";
+"use client";
+import React, { useEffect } from "react";
+import Form from "../component/Form";
 
-export default function Page() {
+export default function Login() {
   return (
-    <div className="flex justify-center items-center">
-      <SignUp />
+    <div>
+      <Form type="login" />
     </div>
   );
 }
