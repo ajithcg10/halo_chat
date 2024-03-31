@@ -8,9 +8,9 @@ import {
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AuthCreate, AuthLogin, getUserData_ById } from "../lib/auth.actions";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { UserState, getData } from "@/app/lib/Redux/userdata";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/app/hooks";
+import { getData } from "@/app/lib/Redux/userdata";
 import Image from "next/image";
 
 type Inputs = {
@@ -174,11 +174,13 @@ export default function Form({ type }: { type: "register" | "login" }) {
 
         {type === "register" ? (
           <Link href="/" className="link">
-            <p className="text-center">Already have an account? Sign In Here</p>
+            Already have an account? Sign In Here
+            {/* <p className="text-center">Already have an account? Sign In Here</p> */}
           </Link>
         ) : (
           <Link href="/register" className="link">
-            <p className="text-center">Don't have an account? Register Here</p>
+            Don't have an account? Register Here
+            {/* <p className="text-center">Don't have an account? Register Here</p> */}
           </Link>
         )}
       </div>
