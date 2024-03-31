@@ -23,7 +23,8 @@ const UserSechema = new Schema({
     chats:{
         type:[{type:Schema.Types.ObjectId,ref:"chat"}],
         default:[]
-    }
+    },
+    clerkId:{type:String},
 }
 )
 const User = models.User || model('User',UserSechema);

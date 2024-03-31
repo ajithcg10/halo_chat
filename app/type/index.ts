@@ -2,7 +2,8 @@ export interface AuthProps {
     user:{
         userName:string,
         email:string,
-        password:string,
+        clerkId:string,
+        password?:string,
         profileImage?:string,
     }
 }

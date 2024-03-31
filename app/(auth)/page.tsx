@@ -1,14 +1,9 @@
-'use client'
-import React, { useEffect } from 'react'
-import Form from '../component/Form'
+import { SignUp } from "@clerk/nextjs";
 
-
-export default  function  Login() {
-
-  
+export default function Page() {
   return (
-    <div>
-       <Form type='login'/>
+    <div className="flex justify-center items-center">
+      <SignUp />
     </div>
-  )
+  );
 }
