@@ -178,7 +178,7 @@ export default function Form({ type }: { type: "register" | "login" }) {
           </Link>
         ) : (
           <Link href="/register" className="link">
-            Don't have an account? Register Here
+            Don&apos;t have an account? Register Here
           </Link>
         )}
       </div>
