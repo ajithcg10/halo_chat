@@ -175,12 +175,10 @@ export default function Form({ type }: { type: "register" | "login" }) {
         {type === "register" ? (
           <Link href="/" className="link">
             Already have an account? Sign In Here
-            {/* <p className="text-center">Already have an account? Sign In Here</p> */}
           </Link>
         ) : (
           <Link href="/register" className="link">
             Don't have an account? Register Here
-            {/* <p className="text-center">Don't have an account? Register Here</p> */}
           </Link>
         )}
       </div>
