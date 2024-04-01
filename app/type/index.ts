@@ -3,7 +3,7 @@ export interface AuthProps {
         userName:string,
         email:string,
         clerkId?:string,
-        password:string,
+        password?:string,
         profileImage?:string,
     }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../app/globals.css";
 import Reduxprovider from "./component/provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,5 +16,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <Reduxprovider>{children}</Reduxprovider>;
+  return (
+    <Reduxprovider>
+      <ClerkProvider>{children}</ClerkProvider>
+    </Reduxprovider>
+  );
 }
