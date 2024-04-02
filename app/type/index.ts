@@ -19,12 +19,12 @@ export interface UpdatUSerProps {
     userId:string,
     user:{
         _id: string,
-        chats:any[],
+        chats?:any[],
         userName:string,
         email:string,
-        password:string,
+        password?:string,
         profileImage:string,
-        __v: number,
+        __v?: number,
       },
       path:string
 }

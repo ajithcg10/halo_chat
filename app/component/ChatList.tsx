@@ -22,7 +22,7 @@ export default function ChatList({ currentChatId }: ChatListProps) {
 
       setDataFile(userdata.data?.loginDetails?._id);
       const res = await getAllChat({
-        userID: userdata.data?.loginDetails?._id,
+        userID: userdata?.data?.loginDetails?._id,
         params: serach,
       });
       setChatList(res);

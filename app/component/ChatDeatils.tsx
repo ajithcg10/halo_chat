@@ -37,8 +37,8 @@ export default function ChatDeatils({ chatId }: DeatilsProps) {
       const chatresult = await getByIdChat(chatId);
       const email = localStorage.getItem("email");
       const userdata = await getUserData_ById({ userId: email! });
-      const current_id = userdata.data?.loginDetails?._id;
-      setDataId(userdata.data?.loginDetails?._id);
+      const current_id = userdata?.data?.loginDetails?._id;
+      setDataId(userdata?.data?.loginDetails?._id);
       setChat(chatresult);
       setOthemebers(
         chatresult.members.filter((member: Member) => member._id !== current_id)
