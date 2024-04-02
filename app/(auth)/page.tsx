@@ -1,10 +1,5 @@
-import React, { useEffect } from "react";
-import Form from "../component/Form";
+import { SignUp } from "@clerk/nextjs";
 
-export default function Login() {
-  return (
-    <div>
-      <Form type="login" />
-    </div>
-  );
+export default function Page() {
+  return <SignUp />;
 }

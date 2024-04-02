@@ -17,14 +17,14 @@ export const AuthCreate = async ({user}:AuthProps)=>{
     try{
       await connectToDB()
 
-      const hasPAsword = await bcrypt.hash(user.password ,10)
+      // const hasPAsword = await bcrypt.hash(user.password ,10)
       const emailverify = await User.findOne({ email: user.email})
       if(emailverify){
         return JSON.parse(JSON.stringify({message:"This Email Already Exists",status:401}))
       }
 
 
-      const NewUsers = await User.create({...user, password: hasPAsword})
+      const NewUsers = await User.create({...user})
       
 
       return JSON.parse(JSON.stringify({data:NewUsers, status:200}))
