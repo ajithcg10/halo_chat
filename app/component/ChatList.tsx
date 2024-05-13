@@ -20,7 +20,7 @@ export default function ChatList({ currentChatId }: ChatListProps) {
       const email = localStorage.getItem("email");
       const userdata = await getUserData_ById({ userId: email! });
 
-      setDataFile(userdata.data?.loginDetails?._id);
+      setDataFile(userdata?.data?.loginDetails?._id);
       const res = await getAllChat({
         userID: userdata.data?.loginDetails?._id,
         params: serach,
@@ -45,7 +45,7 @@ export default function ChatList({ currentChatId }: ChatListProps) {
       );
     };
 
-    pusherClient.bind("update-chat", handleChatUpdate);
+    pusherClient?.bind("update-chat", handleChatUpdate);
     return () => {
       pusherClient.unsubscribe(dataFile);
       pusherClient.unbind("update-chat", handleChatUpdate);

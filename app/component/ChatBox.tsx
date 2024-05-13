@@ -63,7 +63,7 @@ export default function ChatBox({
           ) : (
             <p className="text-base-bold">{otheMembers[0]?.userName}</p>
           )}
-          {!latestMessage && <p className="text-semi-bold">Start New Chat</p>}
+          {!latestMessage && <p className="text-semi-bold">Start new Chat</p>}
           {latestMessage?.photo ? (
             latestMessage?.sender._id === currentUserID ? (
               <p
