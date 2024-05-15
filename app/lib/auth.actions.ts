@@ -44,7 +44,7 @@ export const AuthLogin = async ({user,isVerifyed}:LoginProps)=>{
       
       const CreateLogin = await Login.create({...user,loginDetails:foundUser._id,isVerifyed:isVerifyed})
       
-      if(!foundUser){
+      if(!foundUser){ 
         throw new Error(`email is not available`)
       }
  

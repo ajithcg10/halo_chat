@@ -2,16 +2,19 @@
 
 import { Logout } from "@mui/icons-material";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { getUserData_ById } from "../lib/auth.actions";
 import { UserDataProps } from "../type";
 import Image from "next/image";
+import MobileMenu from "./MobileMenu";
 
 const TopBar = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [datafile, setDataFile] = useState<UserDataProps>();
+  const [isopen, setOPen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetch_data = async () => {
@@ -22,9 +25,6 @@ const TopBar = () => {
     fetch_data();
   }, []);
 
-  const handleLogout = async () => {
-    // signOut({ callbackUrl: "/" });
-  };
   const initalData = useAppSelector((state) => state.userSlice);
   return (
     <div className="topbar wrapper">
@@ -58,7 +58,7 @@ const TopBar = () => {
 
         <Logout
           sx={{ color: "#737373", cursor: "pointer" }}
-          onClick={handleLogout}
+          onClick={() => router.push("/")}
         />
 
         <Link href="/profile">
@@ -73,6 +73,10 @@ const TopBar = () => {
           />
         </Link>
       </div>
+      <div className="hidden max-sm:block" onClick={() => setOPen(!isopen)}>
+        open
+      </div>
+      <MobileMenu isopen={isopen} setOPen={setOPen} />
     </div>
   );
 };
